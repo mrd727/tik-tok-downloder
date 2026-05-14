@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TikTok HD Downloader</title>
+
+<style>
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+margin-top:80px;
+}
+
+input{
+width:420px;
+padding:15px;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:14px 25px;
+margin:10px;
+background:#ff0050;
+border:none;
+color:white;
+cursor:pointer;
+border-radius:8px;
+}
+
+video{
+width:420px;
+margin-top:20px;
+border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔥 TikTok HD Downloader</h1>
+
+<input id="link" placeholder="Paste TikTok Link">
+<br>
+<button onclick="download()">Download HD</button>
+
+<div id="result"></div>
+
+<script>
+async function download(){
+
+const url=document.getElementById("link").value;
+
+document.getElementById("result").innerHTML="Processing...";
+
+const res=await fetch("/api/download",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({url})
+});
+
+const data=await res.json();
+
+document.getElementById("result").innerHTML=`
+<video controls src="${data.hd}"></video><br>
+
+<a href="${data.hd}" download>
+<button>Download HD</button>
+</a>
+
+<a href="${data.normal}" download>
+<button>Normal</button>
+</a>
+`;
+}
+</script>
+
+</body>
+</html>

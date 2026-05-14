@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/download.js": {
+    "api/*.js": {
       "runtime": "nodejs18.x"
     }
   }
